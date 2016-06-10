@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController,
                             UICollectionViewDelegate,
@@ -14,7 +15,12 @@ class ViewController: UIViewController,
                             UICollectionViewDelegateFlowLayout{
     
     @IBOutlet weak var collectionView:UICollectionView!
+    @IBOutlet weak var playButton:UIButton!
+    
     private var pokemoCollection = [Pokemon]();
+    private var musicPlayer:AVAudioPlayer!;
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,10 +29,26 @@ class ViewController: UIViewController,
         self.collectionView.dataSource = self
         
         parsePokemonCSV()
+        initAudio()
+    }
+    
+    func initAudio(){
+        let audioFile = NSBundle.mainBundle().pathForResource(Config.Main.Resource.SONG_FILENAME, ofType: Config.Main.Resource.SONG_TYPE)!
+        
+        do{
+            musicPlayer = try AVAudioPlayer(contentsOfURL: NSURL(string:audioFile)!)
+            musicPlayer.prepareToPlay()
+            musicPlayer.numberOfLoops = -1
+            musicPlayer.volume = 0.25
+            musicPlayer.play()
+            
+        }catch let error as NSError{
+            print(error.description)
+        }
     }
     
     func parsePokemonCSV(){
-        let csvFile = NSBundle.mainBundle().pathForResource("pokemon", ofType: "csv")!
+        let csvFile = NSBundle.mainBundle().pathForResource(Config.Main.Resource.IMPORT_FILENAME, ofType: Config.Main.Resource.IMPORT_TYPE)!
         
         do {
             let content = try CSVParser(contentsOfURL: csvFile)
@@ -60,7 +82,7 @@ class ViewController: UIViewController,
         
         if let cell = collectionView
             .dequeueReusableCellWithReuseIdentifier(Config.Main.CELL_IDENTIFIER, forIndexPath: indexPath) as? PokeCell{
-                        
+            
             let pokemon = pokemoCollection[indexPath.row]
             cell.configurePokemon(pokemon)
             
@@ -82,6 +104,21 @@ class ViewController: UIViewController,
         return CGSizeMake(110,100)
     }
     
+    @IBAction func setAudio(sender: AnyObject) {
+        
+        var playerImage = Config.Main.MUSIC_PLAYING_IMAGE
+        
+        if musicPlayer.playing {
+            musicPlayer.stop()
+            playerImage = Config.Main.MUSIC_STOP_IMAGE
+            
+        }else{
+            musicPlayer.play()
+            playerImage = Config.Main.MUSIC_PLAYING_IMAGE
+        }
+        
+        playButton.setImage(UIImage(named:playerImage), forState: .Normal)
+    }
 
 }
 
