@@ -16,7 +16,7 @@ class Pokemon{
     var name:String{ get{ return self._name }}
     var pokedexId:Int{
         get{
-            return self._pokedexId + 1
+            return self._pokedexId
         }
     }
     

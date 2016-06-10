@@ -14,12 +14,37 @@ class ViewController: UIViewController,
                             UICollectionViewDelegateFlowLayout{
     
     @IBOutlet weak var collectionView:UICollectionView!
-
+    private var pokemoCollection = [Pokemon]();
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
+        
+        parsePokemonCSV()
+    }
+    
+    func parsePokemonCSV(){
+        let csvFile = NSBundle.mainBundle().pathForResource("pokemon", ofType: "csv")!
+        
+        do {
+            let content = try CSVParser(contentsOfURL: csvFile)
+            let rows = content.rows
+            
+            for row in rows{
+                let pokeId = Int(row["id"]!)!
+                let name = row["identifier"]!
+                
+                let poke = Pokemon(name: name, pokedexId: pokeId)
+                pokemoCollection.append(poke)
+                
+            }
+            
+        }catch let error as NSError{
+            print(error.description)
+        }
+        
     }
     
     
@@ -35,8 +60,8 @@ class ViewController: UIViewController,
         
         if let cell = collectionView
             .dequeueReusableCellWithReuseIdentifier(Config.Main.CELL_IDENTIFIER, forIndexPath: indexPath) as? PokeCell{
-            
-            let pokemon = Pokemon(name: "Unknow", pokedexId: indexPath.row)
+                        
+            let pokemon = pokemoCollection[indexPath.row]
             cell.configurePokemon(pokemon)
             
             return cell
