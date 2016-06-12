@@ -12,7 +12,6 @@ import CoreGraphics
 class Config {
     struct Main{
             static var NUMBER_OF_SECTIONS_IN_COLLECTION_VIEW = 1
-            static var NUMBER_OF_ITEMS_IN_SECTION = 718
             static var CELL_IDENTIFIER = "PokeCell"
             static var CELL_CORNER_RADIUS = CGFloat(10.0)
             static var MUSIC_PLAYING_IMAGE = "speakerOn"
@@ -23,6 +22,10 @@ class Config {
             static var IMPORT_TYPE = "csv"
             static var SONG_FILENAME = "music"
             static var SONG_TYPE = "mp3"
+        }
+        
+        struct Segue {
+            static var POKEMON_DETAIL = "PokemonDetailSegue"
         }
     }
 }
