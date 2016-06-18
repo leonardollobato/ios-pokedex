@@ -155,28 +155,18 @@
                         <outlet property="collectionView" destination="D2n-zB-bju" id="KiN-my-y3O"/>
                         <outlet property="playButton" destination="q9r-Yo-6wG" id="4vU-QD-TWm"/>
                         <outlet property="searchBar" destination="nBC-fF-Udg" id="nP5-Lq-ec2"/>
-                        <segue destination="f4G-tL-aEb" kind="show" identifier="PokemonDetailSegue" id="Edg-Ir-OfU"/>
+                        <segue destination="O3t-lN-iRV" kind="show" identifier="PokemonDetailSegue" id="Edg-Ir-OfU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="305" y="387"/>
         </scene>
-        <!--Pokemon Detail View Controller-->
-        <scene sceneID="EEq-X2-6er">
+        <!--DetailView-->
+        <scene sceneID="EMy-hm-rc1">
             <objects>
-                <viewController id="f4G-tL-aEb" customClass="PokemonDetailViewController" customModule="pokedex" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="lG5-Lh-CKz"/>
-                        <viewControllerLayoutGuide type="bottom" id="uRU-4s-nOf"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="0iA-bc-VRN">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EQS-iZ-7IS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="DetailView" id="O3t-lN-iRV" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HiV-F3-Lbx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="973" y="386"/>
         </scene>
